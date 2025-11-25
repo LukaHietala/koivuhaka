@@ -1,0 +1,10 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title><%= page_title or "Koivuhaan asunnot" %></title>
+</head>
+<body>
+  <% content_for("inner") %>
+</body>
+</html>
