@@ -1,0 +1,2 @@
+2025/11/25 14:43:13 [alert] 47449#0: lua_code_cache is off; this will hurt performance in /home/lhietala/repos/koivuhaka/nginx.conf.compiled:20
+2025/11/26 08:03:47 [alert] 4333#0: lua_code_cache is off; this will hurt performance in /home/lhietala/repos/koivuhaka/nginx.conf.compiled:20

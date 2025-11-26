@@ -3,23 +3,49 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Bootstrap demo</title>
+    <title>Koivuhaan asunto</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
   </head>
   <body>
+    <div class="mb-5 container-fluid px-0 position-relative" style="height: 500px; overflow: hidden">
+        <img class="w-100" src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b0/2010s_residential_area_near_Peltolantie_and_Tikkurilantie_in_Koivuhaka%2C_Vantaa%2C_Finland%2C_2021_September.jpg/2560px-2010s_residential_area_near_Peltolantie_and_Tikkurilantie_in_Koivuhaka%2C_Vantaa%2C_Finland%2C_2021_September.jpg" class="img-fluid">
+	<h1 class="position-absolute top-50 start-50 translate-middle text-white bg-dark px-4 py-2 fw-bold display-6">Koivuhaan Asuntolat</h1>
+    </div>
+
     <div class="container">
-	<div class="row row-cols-3 g-3">
+	<h2 class="mb-4">Asuntolat</h2>
+	<div class="row row-cols-3 g-3 mb-5">
 	    <% for i, asunto in pairs(asunnot) do %>
 		<div class="col">
 		    <div class="card">
 			<img class="card-img-top" src="<%= asunto["kuva"] %>" alt="kuva asunnosta">
-			<div class="card-img-overlay">
+			<div class="card-body">
 			    <h4 class="card-title">
 				<%= asunto["osoite"] %>
 			    </h4>
+			    <div class="d-inline-flex gap-2">
+				<small class="text-body-secondary"><%= asunto["hinta"]%> €</small>
+				<small class="text-body-secondary"><%= asunto["pinta-ala"]%> m²</small>
+				<small class="text-body-secondary"><%= asunto["rakennusvuosi"]%></small>
+			    </div>
 			</div>
 		    </div>
 		</div>
+	    <% end %>
+	</div>
+	<h2 class="mb-4">Tietoa meistä</h2>
+	<div class="row row-cols-5 g-5 mb-5">
+	    <% for i=5,1,-1 do %>
+	    <div class="col">
+		<div class="card border-0">
+		    <img class="card-img-top rounded-circle" src="https://www.w3schools.com/bootstrap5/img_avatar3.png" alt="jäsen">
+		    <div class="card-body">
+			<h5 class="card-title text-center">
+			    Matti Meikäläinen
+			</h5>
+		    </div>
+		</div>
+	    </div>
 	    <% end %>
 	</div>
     </div>
