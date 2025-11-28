@@ -1,0 +1,10 @@
+<form action="" method="post">
+    <label for="name">Osoite:</label><br>
+    <input type="text" id="address" name="address" required/><br>
+    <label for="picture">Kuva:</label><br>
+    <input type="text" id="picture" name="picture" required/><br>
+    <label for="price">Hinta:</label><br>
+    <input type="number" id="price" name="price" required min="1" max="10000000"/><br>
+    <button type="submit">Luo</button>
+</form> 
+

@@ -46,8 +46,6 @@
 			    </h4>
 			    <div class="d-inline-flex gap-2">
 				<small class="text-body-secondary"><%= asunto["hinta"]%> €</small>
-				<small class="text-body-secondary"><%= asunto["pinta-ala"]%> m²</small>
-				<small class="text-body-secondary"><%= asunto["rakennusvuosi"]%></small>
 			    </div>
 			</div>
 		    </div>
