@@ -62,6 +62,11 @@ app:match("kirjaudu", "/kirjaudu", respond_to({
   end
 }))
 
+app:match("kirjaudu-ulos", "/kirjaudu-ulos", function(self)
+    self.session.user = nil
+    return { redirect_to = "/"}
+end)
+
 app:match("hallintapaneeli", "/hallintapaneeli", respond_to({
   before = function(self)
     if not self.session.user then
