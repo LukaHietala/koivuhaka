@@ -75,8 +75,25 @@ app:match("hallintapaneeli", "/hallintapaneeli", respond_to({
   -- luo asunto entry ja muokkaa sivua
   POST = function(self)
     local address = strip(self.params.address)
-    local picture = strip(self.params.picture)
+    local picture_file = self.params.file
     local price = strip(self.params.price)
+
+    local picture = ""
+    -- write img binary to file, risky and not validation :D. all params are TRUSTED
+    -- path traversal attacks possible
+    -- https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Content-Disposition#Directives
+    local out = io.open("./static/images/" .. picture_file.filename, "wb")
+    if out == nil then
+	return { redirect_to = "/" }
+    end
+    -- nginx limits the img size to 1mb by defaykt
+
+    local data = picture_file.content
+    data = string.gsub(data, "\r\n", "\n") -- for unix
+    out:write(data)
+    out:close()
+
+    picture = "http://localhost:8080/static/images/" .. picture_file.filename --öaldsfkölsadkfölakdsfölkasöldfkö
 
     if address == "" or picture == "" or price == "" then
 	return { redirect_to = "/hallintapaneeli"}
@@ -92,3 +109,4 @@ app:match("hallintapaneeli", "/hallintapaneeli", respond_to({
 }))
 
 return app
+
