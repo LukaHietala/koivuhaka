@@ -15,6 +15,15 @@
 	    <li class="nav-item">
 	      <a class="nav-link" href="#tiimi">Ota yhteyttä</a>
 	    </li>
+		<% if session.user then %>
+		<li class="nav-item">
+	      <a class="nav-link" href="/kirjaudu-ulos">Kirjaudu ulos</a>
+	    </li>
+	    <% else %>
+	    <li class="nav-item">
+	      <a class="nav-link" href="/kirjaudu">Kirjaudu</a>
+	    </li>
+	    <% end %>
 	  </ul>
 	</div>
   </div>
