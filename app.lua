@@ -21,10 +21,55 @@ local function isNumber(str)
     end
 end
 
+-- opens and checks if file exists
+local function file_exists(file)
+  local f = io.open(file, "rb")
+  if f then f:close() end
+  return f ~= nil
+end
+
+-- returns a table with lines in file
+local function lines_from(file)
+  if not file_exists(file) then return {} end
+  local lines = {}
+  for line in io.lines(file) do
+    lines[#lines + 1] = line
+  end
+  return lines
+end
+
+
+local function readTeamDesc()
+    local lines = lines_from("team-description.txt")
+    if lines then
+	return lines[1]
+    end
+    return nil
+end
+
 app:get("index", "/", function(self)
     local res = db.query("SELECT * FROM asunnot")
     self.asunnot = res
+    self.team_desc = readTeamDesc()
     return { render = true }
+end)
+
+app:post("edit-description", "/edit-description", function(self)
+    if not self.session.user then
+	return { redirect_to = "/" }
+    end
+
+    local new_desc = strip(self.params.description)
+    if not file_exists("team-description.txt") then return {} end
+    local f = io.open("team-description.txt", "w")
+
+    if f == nil then
+	return { redirect_to = "/" }
+    end
+
+    f:write(new_desc)
+    f:close()
+    return { redirect_to = "/" }
 end)
 
 app:match("kirjaudu", "/kirjaudu", respond_to({
@@ -98,7 +143,7 @@ app:match("hallintapaneeli", "/hallintapaneeli", respond_to({
     out:write(data)
     out:close()
 
-    picture = "http://localhost:8080/static/images/" .. picture_file.filename --öaldsfkölsadkfölakdsfölkasöldfkö
+    picture = "http://localhost:8080/static/images/" .. picture_file.filename
 
     if address == "" or picture == "" or price == "" then
 	return { redirect_to = "/hallintapaneeli"}
@@ -112,6 +157,7 @@ app:match("hallintapaneeli", "/hallintapaneeli", respond_to({
     return { redirect_to = "/" }
   end
 }))
+
 
 return app
 
